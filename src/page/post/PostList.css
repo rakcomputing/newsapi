@@ -15,3 +15,25 @@
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
 }
+.sprinSave-container {
+    position: relative;
+    max-width: 400px;
+    /* Adjust the value based on your design */
+    margin: 0 auto;
+    /* Center the container horizontally */
+}
+
+.sprinSave {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(249, 249, 249, 0.7);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    /* Ensure the spinner is above other content within the container */
+}

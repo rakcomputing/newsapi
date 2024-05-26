@@ -44,7 +44,7 @@ const LayoutPage = () => {
     <Layout>
       <Header
         style={{
-          background: "#fff",
+          background: "#F8F9F9",
           position: "sticky",
           top: 0,
           zIndex: 1,
@@ -59,7 +59,12 @@ const LayoutPage = () => {
           mode="horizontal"
           defaultSelectedKeys={["2"]}
           items={items}
-          style={{ flex: 1, minWidth: 0, fontWeight: "bold" }}
+          style={{
+            flex: 1,
+            minWidth: 0,
+            fontWeight: "bold",
+            background: "#F8F9F9",
+          }}
         />
         <Input
           type="text"

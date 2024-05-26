@@ -3,11 +3,13 @@ import PostCard from "./PostCard";
 import axios from "axios";
 import { useOutletContext } from "react-router-dom";
 import "./PostList.css";
+import { Circles } from "react-loader-spinner";
 const PostList = () => {
   const { searchTerm } = useOutletContext();
   const [posts, setPosts] = useState([]);
   const [listNews, setListNews] = useState([]);
   const [filteredNews, setFilteredNews] = useState([]);
+  const [loading, setloading] = useState(false);
   // Sample data
   const list = [
     {
@@ -45,11 +47,18 @@ const PostList = () => {
 
   const getListNews = async () => {
     const response = await axios.get(
-      "https://newsapi.org/v2/everything?q=tesla&from=2024-04-25&sortBy=publishedAt&apiKey=4ccb35fa4dcb43a8b494babec47e2024"
+      "https://newsapi.org/v2/everything?q=apple&from=2024-05-24&to=2024-05-24&sortBy=popularity&apiKey=4ccb35fa4dcb43a8b494babec47e2024"
     );
     try {
-      setListNews(response.data.articles);
-      setFilteredNews(response.data.articles);
+      if (response) {
+        setloading(true);
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+        setListNews(response.data.articles);
+        setFilteredNews(response.data.articles);
+        setloading(false);
+      } else {
+        setloading(false);
+      }
       console.table("this sis news list : ", response.data.articles.urlToImage);
     } catch (error) {
       console.log(error);
@@ -67,10 +76,28 @@ const PostList = () => {
     }
   }, [searchTerm, listNews]);
   return (
-    <div className="post-list">
-      {filteredNews.map((post) => (
-        <PostCard post={post} />
-      ))}
+    <div>
+      <div className="sprinSave-container">
+        {/* Your other components */}
+        {loading && (
+          <div className="sprinSave">
+            <Circles
+              height="80"
+              width="80"
+              color="#4fa94d"
+              ariaLabel="circles-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />
+          </div>
+        )}
+      </div>
+      <div className="post-list">
+        {filteredNews.map((post) => (
+          <PostCard post={post} />
+        ))}
+      </div>
     </div>
   );
 };
