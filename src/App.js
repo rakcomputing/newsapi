@@ -11,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LayoutPage />}>
           <Route path="home" element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="allpost" element={<TaksApp />} />
           <Route path="share" element={<PostList />} />
         </Route>
